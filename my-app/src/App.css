@@ -1,0 +1,138 @@
+/* Reset e centralização */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+}
+
+/* Container principal */
+.app-container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Título */
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Formulário com inputs centralizados */
+form {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form input,
+form textarea {
+  width: 80%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+}
+
+form button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* Container dos cards */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 30px;
+  column-gap: 30px;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Card de produto */
+.produto-card {
+  width: 300px;
+  max-width: 100%;
+  flex-shrink: 0;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  margin-bottom: 30px;
+}
+
+.produto-card:hover {
+  transform: scale(1.02);
+}
+
+.produto-card img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.produto-card h2 {
+  margin-top: 12px;
+  color: #333;
+  font-size: 20px;
+}
+
+.produto-card p {
+  color: #555;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+/* Responsivo para celular */
+@media (max-width: 600px) {
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .produto-card {
+    width: 90%;
+  }
+
+  form {
+    width: 90%;
+  }
+
+  form input,
+  form textarea {
+    width: 100%;
+  }
+}

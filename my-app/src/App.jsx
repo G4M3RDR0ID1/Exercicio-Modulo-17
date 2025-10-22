@@ -1,24 +1,58 @@
-import React from "react"
+import { useEffect, useState } from "react";
+import FormularioProduto from "./components/FormularioProduto.jsx";
 import ProdutoCard from "./components/ProdutoCard.jsx"
+import './App.css';
+
 
 function App() {
   //Exemplo de Dados de um produto que veio de uma API
-  const produto = {
+
+  const [produtos, setProdutos] = useState([])
+  const [carregamento, setCarregamento] = useState(true);
+
+  useEffect(()=>{
+    setTimeout(() =>{
+      const produtosMockados = [
+        {
+    id: 1,
     nome: 'Smartphone X',
     preco: 1999.99,
-    imagem: 'data:image/jpeg;base64,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',
+    imagem: 'https://images.unsplash.com/photo-1639313265378-1c51cf8cfebd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGlwaG9uZSUyMHByYSUyMHZlbmRhfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
     descricao: 'Um smartphone moderno com câmera de alta resolução e bateria de longa duração.'
-  };
+    },
+
+    {  
+    id: 2,
+    nome: 'Notebook Y',
+    preco: 3499.99,
+    imagem: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500',
+    descricao: 'Ideal para trabalho e estudos, com tela Full HD.'
+    },
+
+    {
+    id: 3,
+    nome: 'Fone de Ouvido Z',
+    preco: 299.99,
+    imagem: 'https://images.unsplash.com/photo-1629429407756-4a7703614972?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fGZvbmUlMjBkZSUyMG91dmlkb3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=500',
+    descricao: 'Som imersivo e cancelamento de ruído ativo.'
+    }
+    ];
+
+    setProdutos(produtosMockados);
+    setCarregamento(false);
+
+    }, 2000);
+  }, []);
+
+  if(carregamento){
+    return <p>Carregando...</p>;
+    }
 
   return (
-    <div>
+    <div className="produto-card">
       <h1>Catalogo de Produtos</h1>
-      <ProdutoCard
-        nome={produto.nome}
-        preco={produto.preco}
-        imagem={produto.imagem}
-        descricao={produto.descricao}
-      />
+      {produtos.map(produto => ( <ProdutoCard key={produto.id} nome={produto.nome} preco={produto.preco} imagem={produto.imagem} descricao={produto.descricao}/>))}
+      <FormularioProduto aoAdicionar={(novoProduto) => setProdutos([...produtos, novoProduto])}/>
     </div>
   )
 }
